@@ -21,6 +21,7 @@ function App() {
 		} else if (name && isEditing) {
 			//deal with edit
 		} else {
+			showAlert(true, "success", "item added to the list");
 			// if everything is right
 			// show alert
 			const newItem = {
@@ -33,6 +34,14 @@ function App() {
 	};
 	const showAlert = (show = false, type = "", msg = "") => {
 		setAlert({ show: show, type, msg });
+	};
+	const clearList = () => {
+		showAlert(true, "danger", "empty list");
+		setList([]);
+	};
+	const removeItem = (id) => {
+		showAlert(true, "danger", "item removed");
+		setList(list.filter((item) => item.id !== id));
 	};
 	return (
 		<section className="section-center">
@@ -55,7 +64,9 @@ function App() {
 			{list.length > 0 && (
 				<div className="grocery-container">
 					<List items={list} />
-					<button className="clear-btn">clear items</button>
+					<button className="clear-btn" onClick={clearList}>
+						clear items
+					</button>
 				</div>
 			)}
 		</section>
